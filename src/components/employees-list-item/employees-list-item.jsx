@@ -1,9 +1,10 @@
+import React from 'react';
 import './employees-list-item.css';
 
 export const EmployeesListItem = ({
   name,
   salary,
-  increase
+  increase,
 }) => {
   let liClassNames =
     'list-group-item d-flex justify-content-between';
