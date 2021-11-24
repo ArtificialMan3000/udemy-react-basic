@@ -1,18 +1,19 @@
 import React from 'react';
+import classnames from 'classnames';
 import './employees-list-item.css';
 
 export const EmployeesListItem = ({
   name,
   salary,
-  increase,
+  increase
 }) => {
-  let liClassNames =
-    'list-group-item d-flex justify-content-between';
-  if (increase) {
-    liClassNames += ' increase';
-  }
   return (
-    <li className={liClassNames}>
+    <li
+      className={classnames(
+        'list-group-item d-flex justify-content-between',
+        { increase }
+      )}
+    >
       <span className="list-group-item-label">
         {name}
       </span>
