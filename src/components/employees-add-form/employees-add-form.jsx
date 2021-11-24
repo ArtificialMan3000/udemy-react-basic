@@ -1,3 +1,4 @@
+import React from 'react';
 import './employees-add-form.css';
 
 export const EmployeesAddForm = () => {
@@ -16,7 +17,10 @@ export const EmployeesAddForm = () => {
           placeholder="З/П в $?"
         />
 
-        <button type="submit" className="btn btn-outline-light">
+        <button
+          type="submit"
+          className="btn btn-outline-light"
+        >
           Добавить
         </button>
       </form>
