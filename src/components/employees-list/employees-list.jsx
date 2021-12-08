@@ -4,13 +4,15 @@ import { EmployeesListItem } from '../employees-list-item/employees-list-item';
 
 export const EmployeesList = ({
   employeesData,
+  onDelete,
 }) => {
   const employeesListItems = employeesData.map(
-    (employeeData) => {
+    ({ id, ...employeeData }) => {
       return (
         <EmployeesListItem
-          key={employeeData.name}
+          key={id}
           {...employeeData}
+          onDelete={() => onDelete(id)}
         />
       );
     }

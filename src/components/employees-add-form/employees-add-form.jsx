@@ -6,7 +6,7 @@ export class EmployeesAddForm extends React.Component {
     super(props);
     this.state = {
       name: '',
-      salary: 0,
+      salary: '',
     };
   }
 
@@ -16,12 +16,22 @@ export class EmployeesAddForm extends React.Component {
     });
   };
 
+  onSubmit = (evt) => {
+    evt.preventDefault();
+    const { name, salary } = this.state;
+    this.props.onCreate({ name, salary });
+    this.setState({ name: '', salary: '' });
+  };
+
   render() {
     const { name, salary } = this.state;
     return (
       <div className="app-add-form">
         <h3>Добавьте нового сотрудника</h3>
-        <form className="add-form d-flex">
+        <form
+          className="add-form d-flex"
+          onSubmit={this.onSubmit}
+        >
           <input
             type="text"
             className="form-control new-post-label"

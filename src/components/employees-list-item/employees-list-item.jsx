@@ -6,7 +6,7 @@ export class EmployeesListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      increase: false,
+      increase: this.props.increase,
     };
   }
 
@@ -17,7 +17,7 @@ export class EmployeesListItem extends React.Component {
   };
 
   render() {
-    const { name, salary } = this.props;
+    const { name, salary, onDelete } = this.props;
     const { increase } = this.state;
 
     return (
@@ -51,7 +51,10 @@ export class EmployeesListItem extends React.Component {
             type="button"
             className="btn-trash btn-sm "
           >
-            <i className="fas fa-trash"></i>
+            <i
+              className="fas fa-trash"
+              onClick={onDelete}
+            ></i>
           </button>
           <i className="fas fa-star"></i>
         </div>
