@@ -16,18 +16,21 @@ export class App extends React.Component {
           name: 'John C.',
           salary: 800,
           increase: true,
+          rise: false,
         },
         {
           id: 2,
           name: 'Alex M.',
           salary: 1300,
           increase: false,
+          rise: false,
         },
         {
           id: 3,
           name: 'Carl W.',
           salary: 5000,
           increase: false,
+          rise: true,
         },
       ],
     };
@@ -41,9 +44,7 @@ export class App extends React.Component {
   deleteItem = (id) => {
     this.setState(({ data }) => {
       return {
-        data: data.filter(
-          (item) => item.id !== id
-        ),
+        data: data.filter((item) => item.id !== id),
       };
     });
   };
@@ -54,8 +55,21 @@ export class App extends React.Component {
       return {
         data: [
           ...data,
-          { id: newItemId, ...itemData },
+          { id: newItemId, increase: false, rise: false, ...itemData },
         ],
+      };
+    });
+  };
+
+  onToggleProp = (id, prop) => {
+    this.setState(({ data }) => {
+      return {
+        data: data.map((item) => {
+          if (item.id === id) {
+            return { ...item, [prop]: !item[prop] };
+          }
+          return { ...item };
+        }),
       };
     });
   };
@@ -63,7 +77,12 @@ export class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <AppInfo />
+        <AppInfo
+          employeesCount={this.state.data.length}
+          increasedsCount={
+            this.state.data.filter((item) => item.increase).length
+          }
+        />
         <div className="search-panel">
           <SearchPanel />
           <AppFilter />
@@ -71,10 +90,9 @@ export class App extends React.Component {
         <EmployeesList
           employeesData={this.state.data}
           onDelete={this.deleteItem}
+          onToggleProp={this.onToggleProp}
         />
-        <EmployeesAddForm
-          onCreate={this.createItem}
-        />
+        <EmployeesAddForm onCreate={this.createItem} />
       </div>
     );
   }
