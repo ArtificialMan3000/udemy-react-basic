@@ -19,8 +19,10 @@ export class EmployeesAddForm extends React.Component {
   onSubmit = (evt) => {
     evt.preventDefault();
     const { name, salary } = this.state;
-    this.props.onCreate({ name, salary });
-    this.setState({ name: '', salary: '' });
+    if (name && salary) {
+      this.props.onCreate({ name, salary });
+      this.setState({ name: '', salary: '' });
+    }
   };
 
   render() {
@@ -28,10 +30,7 @@ export class EmployeesAddForm extends React.Component {
     return (
       <div className="app-add-form">
         <h3>Добавьте нового сотрудника</h3>
-        <form
-          className="add-form d-flex"
-          onSubmit={this.onSubmit}
-        >
+        <form className="add-form d-flex" onSubmit={this.onSubmit}>
           <input
             type="text"
             className="form-control new-post-label"
@@ -49,10 +48,7 @@ export class EmployeesAddForm extends React.Component {
             onChange={this.onValueChange}
           />
 
-          <button
-            type="submit"
-            className="btn btn-outline-light"
-          >
+          <button type="submit" className="btn btn-outline-light">
             Добавить
           </button>
         </form>
